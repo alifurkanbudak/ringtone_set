@@ -39,7 +39,11 @@ class RingtoneSet {
     return result;
   }
 
-  static Future<String> setNotification(String path) async {
+  static Future<String> setNotification(Uint8List bytes) async {
+    final path = '${(await getTemporaryDirectory()).path}/${custom_notif.mp3}';
+    final file = File(path);
+    await file.writeAsBytes(bytes);
+
     final String result =
         await _channel.invokeMethod('setNotification', {"path": path});
     return result;
