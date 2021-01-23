@@ -39,13 +39,7 @@ class RingtoneSet {
     return result;
   }
 
-  static Future<String> setNotification(String asset) async {
-    final path =
-        '${(await getTemporaryDirectory()).path}/${asset.split('/').last}';
-    final file = File(path);
-    final assetload = await rootBundle.load(asset);
-    await file.writeAsBytes((assetload).buffer.asUint8List());
-
+  static Future<String> setNotification(String path) async {
     final String result =
         await _channel.invokeMethod('setNotification', {"path": path});
     return result;
