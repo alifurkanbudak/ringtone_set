@@ -40,8 +40,9 @@ class RingtoneSet {
     return result;
   }
 
-  static Future<String> setNotification(Uint8List bytes) async {
-    final path = '${(await getTemporaryDirectory()).path}/${custom_notif.mp3}';
+  static Future<String> setNotification(Uint8List bytes,
+      {String name = 'custom_notif.mp3'}) async {
+    final path = '${(await getTemporaryDirectory()).path}/$name';
     final file = File(path);
     await file.writeAsBytes(bytes);
 
